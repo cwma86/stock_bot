@@ -16,8 +16,10 @@ import smtplib
 
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s'
+    format='%(asctime)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s',
+    filename='/home/corym/stock_bot.log'
 )
+
 
 class Product:
     def __init__(
@@ -46,7 +48,6 @@ def send_notification(message_body):
     s.sendmail(email, email, message)
     # terminating the session
     s.quit()
-    time.sleep(60*60) # We have been alerted for an in stock item, sleep for the next hour
 
 def checkBestBuy():
     
@@ -58,18 +59,25 @@ def checkBestBuy():
         Product("5080 Gigabyte", "6615925", "https://www.bestbuy.com/site/gigabyte-nvidia-geforce-rtx-5080-gaming-oc-16g-gddr7-pci-express-5-0-graphics-card-black/6615925.p?skuId=6615925"),
         Product("5080 MSI", "6615227", "https://www.bestbuy.com/site/msi-nvidia-geforce-rtx-5080-16g-gaming-trio-oc-16gb-gddr7-pci-express-gen-5-graphics-card-black/6615227.p?skuId=6615227"),
         Product("5090 Gigabyte", "6615930", "https://www.bestbuy.com/site/gigabyte-nvidia-geforce-rtx-5090-windforce-oc-32g-gddr7-pci-express-5-0-graphics-card-black/6615930.p?skuId=6615930"),
+        # TODO remove, just using these for testing 
         # Product("3060", "6468931", "https://www.bestbuy.com/site/gigabyte-nvidia-geforce-rtx-3060-12gb-gddr6-pci-express-4-0-graphics-card-black/6468931.p?skuId=6468931"),
         # Product("ASUS 3060", "6557544", "https://www.bestbuy.com/site/asus-nvidia-geforce-rtx-3060-dual-overclock-12gb-gddr6-pci-express-4-0-graphics-card-black/6557544.p?skuId=6557544")
     ]
-
+    in_stock_message = ""
     for product in item_list:
         response = requests.get(product.url, headers=headers)
         soup = BeautifulSoup(response.content, "html5lib") # If this line causes an error, run 'pip install html5lib' or install html5lib
         mybuttons = soup.find_all("button", {"data-sku-id": product.sku})
         for button in mybuttons:
             if button['data-button-state'] == "ADD_TO_CART":
+                in_stock_message = in_stock_message + f"In stock item {soup.title.text} \n {product.url} \n"
                 logging.info(f"In stock item {soup.title.text}")
-                send_notification(f"In stock item {soup.title.text} \n {product.url}")
+    
+    if in_stock_message:
+        logging.info(f"In stock item found, sending notification")
+        send_notification(f"In stock item {soup.title.text} \n {product.url}")
+        time.sleep(2*60*60) # We have been alerted for an in stock item, sleep for the next hour
+
 
 def main():
     """Main function of the script."""
@@ -79,12 +87,18 @@ def main():
 
     if args.verbose:
         logging.getLogger().setLevel(logging.DEBUG) # Set the logger's level to INFO
-        logging.debug("Logl level set to debug")
+        logging.debug("Log level set to debug")
 
     # Your script logic here
+    check_counter = 0
     while True:
         checkBestBuy()
-        time.sleep(10*60)  # Pause for 10 minutes
+        time.sleep(5*60)  # Pause for 10 minutes
+        check_counter += 1
+        if check_counter > 24:
+            logging.info(f"No Item Found")
+            check_counter = 0
+
     
 if __name__ == "__main__":
     main()
