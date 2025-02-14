@@ -55,13 +55,16 @@ def checkBestBuy():
 
     # Extracting the title of the page
     item_list = [
-        Product("5080", "6614153", "https://www.bestbuy.com/site/nvidia-geforce-rtx-5080-16gb-gddr7-graphics-card-gun-metal/6614153.p?skuId=6614153"),
+        Product("5080 nvidia", "6614153", "https://www.bestbuy.com/site/nvidia-geforce-rtx-5080-16gb-gddr7-graphics-card-gun-metal/6614153.p?skuId=6614153"),
+        Product("5080 ASUS", "6613335", "https://www.bestbuy.com/site/asus-prime-nvidia-geforce-rtx-5080-16gb-gddr7-pci-express-5-0-graphics-card-black/6613335.p?skuId=6613335"),
         Product("5080 Gigabyte", "6615925", "https://www.bestbuy.com/site/gigabyte-nvidia-geforce-rtx-5080-gaming-oc-16g-gddr7-pci-express-5-0-graphics-card-black/6615925.p?skuId=6615925"),
         Product("5080 MSI", "6615227", "https://www.bestbuy.com/site/msi-nvidia-geforce-rtx-5080-16g-gaming-trio-oc-16gb-gddr7-pci-express-gen-5-graphics-card-black/6615227.p?skuId=6615227"),
         Product("5090 Gigabyte", "6615930", "https://www.bestbuy.com/site/gigabyte-nvidia-geforce-rtx-5090-windforce-oc-32g-gddr7-pci-express-5-0-graphics-card-black/6615930.p?skuId=6615930"),
+        Product("5090 nvidia", "6614151", "https://www.bestbuy.com/site/nvidia-geforce-rtx-5090-32gb-gddr7-graphics-card-dark-gun-metal/6614151.p?skuId=6614151"),
+        Product("5090 ASUS", "6614119", "https://www.bestbuy.com/site/asus-tuf-gaming-nvidia-geforce-rtx-5090-32gb-gddr7-pci-express-5-0-graphics-card-black/6614119.p?skuId=6614119"),
         # TODO remove, just using these for testing 
         # Product("3060", "6468931", "https://www.bestbuy.com/site/gigabyte-nvidia-geforce-rtx-3060-12gb-gddr6-pci-express-4-0-graphics-card-black/6468931.p?skuId=6468931"),
-        # Product("ASUS 3060", "6557544", "https://www.bestbuy.com/site/asus-nvidia-geforce-rtx-3060-dual-overclock-12gb-gddr6-pci-express-4-0-graphics-card-black/6557544.p?skuId=6557544")
+        Product("ASUS 3060", "6557544", "https://www.bestbuy.com/site/asus-nvidia-geforce-rtx-3060-dual-overclock-12gb-gddr6-pci-express-4-0-graphics-card-black/6557544.p?skuId=6557544")
     ]
     in_stock_message = ""
     for product in item_list:
