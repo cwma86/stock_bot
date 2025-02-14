@@ -64,7 +64,7 @@ def checkBestBuy():
         Product("5090 ASUS", "6614119", "https://www.bestbuy.com/site/asus-tuf-gaming-nvidia-geforce-rtx-5090-32gb-gddr7-pci-express-5-0-graphics-card-black/6614119.p?skuId=6614119"),
         # TODO remove, just using these for testing 
         # Product("3060", "6468931", "https://www.bestbuy.com/site/gigabyte-nvidia-geforce-rtx-3060-12gb-gddr6-pci-express-4-0-graphics-card-black/6468931.p?skuId=6468931"),
-        Product("ASUS 3060", "6557544", "https://www.bestbuy.com/site/asus-nvidia-geforce-rtx-3060-dual-overclock-12gb-gddr6-pci-express-4-0-graphics-card-black/6557544.p?skuId=6557544")
+        # Product("ASUS 3060", "6557544", "https://www.bestbuy.com/site/asus-nvidia-geforce-rtx-3060-dual-overclock-12gb-gddr6-pci-express-4-0-graphics-card-black/6557544.p?skuId=6557544")
     ]
     in_stock_message = ""
     for product in item_list:
