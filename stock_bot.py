@@ -84,6 +84,7 @@ def checkBestBuy():
 
 def main():
     """Main function of the script."""
+    logging.info("Starting app")
     parser = argparse.ArgumentParser(description="Description of the script")
     parser.add_argument("-v", "--verbose", action="store_true", help="Increase output verbosity")
     args = parser.parse_args()
